@@ -16,6 +16,9 @@ public class AppUser {
     @Column(nullable = false)
     private String password;
 
+    public AppUser() {
+    }
+
     public AppUser(String username, String password) {
         this.username = username;
         this.password = password;
