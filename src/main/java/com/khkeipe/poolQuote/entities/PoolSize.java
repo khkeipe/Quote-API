@@ -20,25 +20,24 @@ public class PoolSize {
     @Column
     private int depth;
 
-    @OneToMany(mappedBy = "pool", fetch = FetchType.EAGER)
-    private List<Pool> pools;
+    @OneToMany(mappedBy = "size")
+    private List<Pool> poolList;
 
     public PoolSize() {
     }
 
-    public PoolSize(int length, int width, int depth, List<Pool> pools) {
+    public PoolSize(int length, int width, int depth) {
         this.length = length;
         this.width = width;
         this.depth = depth;
-        this.pools = pools;
+
     }
 
-    public PoolSize(int id, int length, int width, int depth, List<Pool> pools) {
+    public PoolSize(int id, int length, int width, int depth) {
         this.id = id;
         this.length = length;
         this.width = width;
         this.depth = depth;
-        this.pools = pools;
     }
 
     public int getId() {
@@ -73,14 +72,6 @@ public class PoolSize {
         this.depth = depth;
     }
 
-    public List<Pool> getPools() {
-        return pools;
-    }
-
-    public void setPools(List<Pool> pools) {
-        this.pools = pools;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,13 +80,12 @@ public class PoolSize {
         return id == poolSize.id &&
                 length == poolSize.length &&
                 width == poolSize.width &&
-                depth == poolSize.depth &&
-                Objects.equals(pools, poolSize.pools);
+                depth == poolSize.depth;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, length, width, depth, pools);
+        return Objects.hash(id, length, width, depth);
     }
 
     @Override
@@ -105,7 +95,6 @@ public class PoolSize {
                 ", length=" + length +
                 ", width=" + width +
                 ", depth=" + depth +
-                ", pools=" + pools +
                 '}';
     }
 }

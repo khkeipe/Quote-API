@@ -1,5 +1,7 @@
 package com.khkeipe.poolQuote.entities;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,40 +12,40 @@ public class Pool {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    private String poolType;
+    @Enumerated(EnumType.STRING)
+    private PoolType poolType;
 
     @Column
     private String poolCode;
 
     @Column
-    private String Metric;
+    private String poolMetric;
 
     @Column
     private String metricCode;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private PoolSize pooSize;
+    private PoolSize size;
 
     public Pool() {
     }
 
-    public Pool(String poolType, String poolCode, String metric, String metricCode, PoolSize pooSize) {
+    public Pool(PoolType poolType, String poolCode, String metric, String metricCode, PoolSize size) {
         this.poolType = poolType;
         this.poolCode = poolCode;
-        Metric = metric;
+        this.poolMetric = metric;
         this.metricCode = metricCode;
-        this.pooSize = pooSize;
+        this.size = size;
     }
 
-    public Pool(int id, String poolType, String poolCode, String metric, String metricCode, PoolSize pooSize) {
+    public Pool(int id, PoolType poolType, String poolCode, String metric, String metricCode, PoolSize size) {
         this.id = id;
         this.poolType = poolType;
         this.poolCode = poolCode;
-        Metric = metric;
+        this.poolMetric = metric;
         this.metricCode = metricCode;
-        this.pooSize = pooSize;
+        this.size = size;
     }
 
     public int getId() {
@@ -54,11 +56,11 @@ public class Pool {
         this.id = id;
     }
 
-    public String getPoolType() {
+    public PoolType getPoolType() {
         return poolType;
     }
 
-    public void setPoolType(String poolType) {
+    public void setPoolType(PoolType poolType) {
         this.poolType = poolType;
     }
 
@@ -71,11 +73,11 @@ public class Pool {
     }
 
     public String getMetric() {
-        return Metric;
+        return poolMetric;
     }
 
     public void setMetric(String metric) {
-        Metric = metric;
+        poolMetric = metric;
     }
 
     public String getMetricCode() {
@@ -86,12 +88,12 @@ public class Pool {
         this.metricCode = metricCode;
     }
 
-    public PoolSize getPooSize() {
-        return pooSize;
+    public PoolSize getSize() {
+        return size;
     }
 
-    public void setPooSize(PoolSize pooSize) {
-        this.pooSize = pooSize;
+    public void setSize(PoolSize size) {
+        this.size = size;
     }
 
     @Override
@@ -102,25 +104,25 @@ public class Pool {
         return id == pool.id &&
                 Objects.equals(poolType, pool.poolType) &&
                 Objects.equals(poolCode, pool.poolCode) &&
-                Objects.equals(Metric, pool.Metric) &&
+                Objects.equals(poolMetric, pool.poolMetric) &&
                 Objects.equals(metricCode, pool.metricCode) &&
-                Objects.equals(pooSize, pool.pooSize);
+                Objects.equals(size, pool.size);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, poolType, poolCode, Metric, metricCode, pooSize);
+        return Objects.hash(id, poolType, poolCode, poolMetric, metricCode, size);
     }
 
     @Override
     public String toString() {
         return "Pool{" +
                 "id=" + id +
-                ", poolType='" + poolType + '\'' +
+                ", poolType=" + poolType +
                 ", poolCode='" + poolCode + '\'' +
-                ", Metric='" + Metric + '\'' +
+                ", Metric='" + poolMetric + '\'' +
                 ", metricCode='" + metricCode + '\'' +
-                ", pooSize=" + pooSize +
+                ", size=" + size +
                 '}';
     }
 }
