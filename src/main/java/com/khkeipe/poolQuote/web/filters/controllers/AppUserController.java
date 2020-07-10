@@ -1,7 +1,6 @@
-package com.khkeipe.poolQuote.controllers;
+package com.khkeipe.poolQuote.web.filters.controllers;
 
 import com.khkeipe.poolQuote.dtos.AppUserDto;
-import com.khkeipe.poolQuote.entities.AppUser;
 import com.khkeipe.poolQuote.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
