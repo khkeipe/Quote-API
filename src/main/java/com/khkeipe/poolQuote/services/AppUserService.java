@@ -1,7 +1,9 @@
 package com.khkeipe.poolQuote.services;
 
 import com.khkeipe.poolQuote.dtos.AppUserDto;
+import com.khkeipe.poolQuote.dtos.Credentials;
 import com.khkeipe.poolQuote.entities.AppUser;
+import com.khkeipe.poolQuote.exceptions.BadRequestException;
 import com.khkeipe.poolQuote.exceptions.NotFoundException;
 import com.khkeipe.poolQuote.exceptions.ServerErrorException;
 import com.khkeipe.poolQuote.repositories.AppUserRepository;
@@ -50,6 +52,19 @@ public class AppUserService {
             user = userRepo.findById(id).get();
         } catch (Exception e) {
             throw new ServerErrorException("Internal server error occurred");
+        }
+        return new AppUserDto(user);
+    }
+
+    public AppUserDto authenticate(Credentials creds) {
+        AppUser user;
+        if(creds.getEmail() == null || creds.getPassword() == null) {
+            throw new BadRequestException("Please Enter email and password");
+        }
+        try {
+            user = userRepo.findAppUserByEmailAndPassword(creds.getEmail(), creds.getPassword());
+        } catch (Exception e) {
+            throw new ServerErrorException();
         }
         return new AppUserDto(user);
     }
