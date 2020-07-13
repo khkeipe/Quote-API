@@ -13,14 +13,14 @@ public class AppUserDto {
     public AppUserDto() {
     }
 
-    public AppUserDto(String username, String role) {
-        this.email = username;
+    public AppUserDto(String email, String role) {
+        this.email = email;
         this.role = role;
     }
 
-    public AppUserDto(int id, String username, String role) {
+    public AppUserDto(int id, String email, String role) {
         this.id = id;
-        this.email = username;
+        this.email = email;
         this.role = role;
     }
 
@@ -28,6 +28,10 @@ public class AppUserDto {
         this.id = appUser.getId();
         this.email = appUser.getEmail();
         this.role = appUser.getRole().toString();
+    }
+
+    public AppUserDto(Credentials creds) {
+        this.email = creds.getEmail();
     }
 
     public int getId() {
