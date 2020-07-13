@@ -5,6 +5,7 @@ import com.khkeipe.poolQuote.entities.AppUser;
 import com.khkeipe.poolQuote.exceptions.NotFoundException;
 import com.khkeipe.poolQuote.exceptions.ServerErrorException;
 import com.khkeipe.poolQuote.repositories.AppUserRepository;
+import com.khkeipe.poolQuote.util.GetList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class AppUserService {
         Iterable<AppUser> e;
         try {
             e = userRepo.findAll();
-            users = getListFromIterable(e);
+            users = GetList.getListFromIterable(e);
         } catch (Exception exception) {
             throw new ServerErrorException("Internal server error occurred, unable to fetch users");
         }
@@ -51,12 +52,6 @@ public class AppUserService {
             throw new ServerErrorException("Internal server error occurred");
         }
         return new AppUserDto(user);
-    }
-
-    public static <T> List<T> getListFromIterable(Iterable<T> e) {
-        List<T> list = new ArrayList<>();
-        e.forEach(list::add);
-        return list;
     }
 
 }
