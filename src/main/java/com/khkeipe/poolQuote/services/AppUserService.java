@@ -2,6 +2,8 @@ package com.khkeipe.poolQuote.services;
 
 import com.khkeipe.poolQuote.dtos.AppUserDto;
 import com.khkeipe.poolQuote.entities.AppUser;
+import com.khkeipe.poolQuote.exceptions.NotFoundException;
+import com.khkeipe.poolQuote.exceptions.ServerErrorException;
 import com.khkeipe.poolQuote.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +24,33 @@ public class AppUserService {
 
     public List<AppUserDto> getAllUsers() {
         List<AppUserDto> dtos = new ArrayList<>();
-        Iterable<AppUser> e = userRepo.findAll();
-        List<AppUser> users = getListFromIterable(e);
-        for(AppUser user : users) {
-            dtos.add(new AppUserDto(user));
+        List<AppUser> users;
+        Iterable<AppUser> e;
+        try {
+            e = userRepo.findAll();
+            users = getListFromIterable(e);
+        } catch (Exception exception) {
+            throw new ServerErrorException("Internal server error occurred, unable to fetch users");
+        }
+        if(users.isEmpty()) {
+            throw new NotFoundException("No users were found");
+        } else {
+
+            for (AppUser user : users) {
+                dtos.add(new AppUserDto(user));
+            }
         }
         return dtos;
+    }
+
+    public AppUserDto getUserById(int id) {
+        AppUser user;
+        try {
+            user = userRepo.findById(id).get();
+        } catch (Exception e) {
+            throw new ServerErrorException("Internal server error occurred");
+        }
+        return new AppUserDto(user);
     }
 
     public static <T> List<T> getListFromIterable(Iterable<T> e) {
