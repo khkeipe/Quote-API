@@ -7,26 +7,26 @@ import java.util.Objects;
 public class AppUserDto {
 
     private int id;
-    private String username;
+    private String email;
     private String role;
 
     public AppUserDto() {
     }
 
     public AppUserDto(String username, String role) {
-        this.username = username;
+        this.email = username;
         this.role = role;
     }
 
     public AppUserDto(int id, String username, String role) {
         this.id = id;
-        this.username = username;
+        this.email = username;
         this.role = role;
     }
 
     public AppUserDto(AppUser appUser) {
         this.id = appUser.getId();
-        this.username = appUser.getUsername();
+        this.email = appUser.getEmail();
         this.role = appUser.getRole().toString();
     }
 
@@ -38,12 +38,12 @@ public class AppUserDto {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRole() {
@@ -60,20 +60,20 @@ public class AppUserDto {
         if (o == null || getClass() != o.getClass()) return false;
         AppUserDto that = (AppUserDto) o;
         return id == that.id &&
-                Objects.equals(username, that.username) &&
+                Objects.equals(email, that.email) &&
                 Objects.equals(role, that.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, role);
+        return Objects.hash(id, email, role);
     }
 
     @Override
     public String toString() {
         return "AppUserDto{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

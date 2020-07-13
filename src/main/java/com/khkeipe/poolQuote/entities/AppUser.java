@@ -12,7 +12,7 @@ public class AppUser {
     private int id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -24,13 +24,13 @@ public class AppUser {
     }
 
     public AppUser(String username, String password) {
-        this.username = username;
+        this.email = username;
         this.password = password;
     }
 
     public AppUser(int id, String username, String password) {
         this.id = id;
-        this.username = username;
+        this.email = username;
         this.password = password;
     }
 
@@ -42,12 +42,12 @@ public class AppUser {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -72,20 +72,20 @@ public class AppUser {
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
         return id == appUser.id &&
-                Objects.equals(username, appUser.username) &&
+                Objects.equals(email, appUser.email) &&
                 Objects.equals(password, appUser.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password);
+        return Objects.hash(id, email, password);
     }
 
     @Override
     public String toString() {
         return "AppUser{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", email'" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
