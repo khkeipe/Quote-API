@@ -1,4 +1,4 @@
-package com.khkeipe.poolQuote.web.filters.controllers;
+package com.khkeipe.poolQuote.web.controllers;
 
 import com.khkeipe.poolQuote.dtos.AppUserDto;
 import com.khkeipe.poolQuote.services.AppUserService;
