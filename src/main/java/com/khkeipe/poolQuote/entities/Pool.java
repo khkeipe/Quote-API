@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "pools")
 public class Pool {
 
     @Id

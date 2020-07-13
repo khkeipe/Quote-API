@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "pool_sizes")
 public class PoolSize {
 
     @Id
