@@ -58,7 +58,7 @@ public class AppUserService {
 
     public AppUserDto authenticate(Credentials creds) {
         AppUser user;
-        if(creds.getEmail() == null || creds.getPassword() == null) {
+        if(creds.getEmail().isEmpty() || creds.getPassword().isEmpty()) {
             throw new BadRequestException("Please Enter email and password");
         }
         try {
