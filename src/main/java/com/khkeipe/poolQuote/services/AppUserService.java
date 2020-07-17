@@ -8,6 +8,7 @@ import com.khkeipe.poolQuote.exceptions.NotFoundException;
 import com.khkeipe.poolQuote.exceptions.ServerErrorException;
 import com.khkeipe.poolQuote.repositories.AppUserRepository;
 import com.khkeipe.poolQuote.util.GetList;
+import jdk.nashorn.internal.runtime.Undefined;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,14 +62,18 @@ public class AppUserService {
     @Transactional
     public AppUserDto authenticate(Credentials creds) {
         AppUser user;
-        if(creds.getEmail().trim().equals("") || creds.getPassword().trim().equals("")) {
-            throw new BadRequestException("Please enter email and password");
-        }
+            if(creds.getEmail().trim().equals("") || creds.getPassword().trim().equals("")) {
+                throw new BadRequestException("Please enter email and password");
+            }
         try {
             user = userRepo.findAppUserByEmailAndPassword(creds.getEmail(), creds.getPassword());
+            if(user == null) {
+                throw new NotFoundException("No user found with provided email and password");
+            }
         } catch (Exception e) {
-            throw new ServerErrorException();
+            throw new NotFoundException("No user found with provided email and password");
         }
+
         return new AppUserDto(user);
     }
 
