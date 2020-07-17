@@ -10,6 +10,7 @@ import com.khkeipe.poolQuote.repositories.AppUserRepository;
 import com.khkeipe.poolQuote.util.GetList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class AppUserService {
         this.userRepo = repo;
     }
 
-
+    @Transactional(readOnly = true)
     public List<AppUserDto> getAllUsers() {
         List<AppUserDto> dtos = new ArrayList<>();
         List<AppUser> users;
@@ -46,6 +47,7 @@ public class AppUserService {
         return dtos;
     }
 
+    @Transactional(readOnly = true)
     public AppUserDto getUserById(int id) {
         AppUser user;
         try {
@@ -56,10 +58,11 @@ public class AppUserService {
         return new AppUserDto(user);
     }
 
+    @Transactional
     public AppUserDto authenticate(Credentials creds) {
         AppUser user;
-        if(creds.getEmail().isEmpty() || creds.getPassword().isEmpty()) {
-            throw new BadRequestException("Please Enter email and password");
+        if(creds.getEmail().trim().equals("") || creds.getPassword().trim().equals("")) {
+            throw new BadRequestException("Please enter email and password");
         }
         try {
             user = userRepo.findAppUserByEmailAndPassword(creds.getEmail(), creds.getPassword());
