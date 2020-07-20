@@ -59,7 +59,12 @@ public class AppUserService {
 
     @Transactional
     public AppUserDto createUser(NewUser newUser) {
+        System.out.println(newUser);
         AppUser user;
+        if(newUser.getEmail().trim().equals("") || newUser.getPassword().trim().equals("") || newUser.getPasswordVerification().trim().equals("")
+        || newUser.getEmail() == null || newUser.getPassword() == null || newUser.getPasswordVerification() == null) {
+            throw new BadRequestException("Please enter email and password");
+        }
 
         AppUser emailCheck = userRepo.findAppUserByEmail(newUser.getEmail());
         if(emailCheck != null) {
