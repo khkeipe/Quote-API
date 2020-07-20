@@ -1,12 +1,10 @@
 package com.khkeipe.poolQuote.web.controllers;
 
 import com.khkeipe.poolQuote.dtos.AppUserDto;
+import com.khkeipe.poolQuote.dtos.NewUser;
 import com.khkeipe.poolQuote.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +27,11 @@ public class AppUserController {
     @GetMapping("/{id}")
     public AppUserDto getUserById(@PathVariable("id") int id) {
         return userService.getUserById(id);
+    }
+
+    @PostMapping("")
+    public AppUserDto createUser(@RequestBody NewUser newUser) {
+        return userService.createUser(newUser);
     }
 
 }
