@@ -1,5 +1,7 @@
 package com.khkeipe.poolQuote.entities;
 
+import com.khkeipe.poolQuote.dtos.NewUser;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -32,6 +34,13 @@ public class AppUser {
         this.id = id;
         this.email = username;
         this.password = password;
+    }
+
+    public AppUser(NewUser newUser) {
+        this.id = id;
+        this.email = newUser.getEmail();
+        this.password = newUser.getPassword();
+        this.role = UserRole.USER;
     }
 
     public int getId() {
