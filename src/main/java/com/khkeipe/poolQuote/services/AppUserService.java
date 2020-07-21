@@ -86,6 +86,16 @@ public class AppUserService {
     @Transactional
     public AppUserDto updateUser(AppUser updatedUser) {
 
+        try {
+            AppUser idCheck = userRepo.findById(updatedUser.getId()).get();
+        } catch (Exception e) {
+            throw new NotFoundException("No user found with id: " + updatedUser.getId());
+        }
+        AppUser emailCheck = userRepo.findAppUserByEmail(updatedUser.getEmail());
+        if(emailCheck != null && updatedUser.getId() != emailCheck.getId()) {
+            throw new ConflictExecption("User with this email already exists");
+        }
+
         AppUser user = userRepo.save(updatedUser);
 
         return new AppUserDto(user);
