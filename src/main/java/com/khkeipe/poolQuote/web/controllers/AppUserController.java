@@ -2,6 +2,7 @@ package com.khkeipe.poolQuote.web.controllers;
 
 import com.khkeipe.poolQuote.dtos.AppUserDto;
 import com.khkeipe.poolQuote.dtos.NewUser;
+import com.khkeipe.poolQuote.entities.AppUser;
 import com.khkeipe.poolQuote.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,11 @@ public class AppUserController {
     @PostMapping("")
     public AppUserDto createUser(@RequestBody NewUser newUser) {
         return userService.createUser(newUser);
+    }
+
+    @PutMapping("")
+    public AppUserDto updateUser(@RequestBody AppUser updatedUser) {
+        return userService.updateUser(updatedUser);
     }
 
 }

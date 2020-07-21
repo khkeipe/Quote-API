@@ -84,6 +84,14 @@ public class AppUserService {
     }
 
     @Transactional
+    public AppUserDto updateUser(AppUser updatedUser) {
+
+        AppUser user = userRepo.save(updatedUser);
+
+        return new AppUserDto(user);
+    }
+
+    @Transactional
     public AppUserDto authenticate(Credentials creds) {
         AppUser user;
             if(creds.getEmail().trim().equals("") || creds.getPassword().trim().equals("")) {
