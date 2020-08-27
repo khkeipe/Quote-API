@@ -22,6 +22,9 @@ public class AppUser {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+    private Address address;
+
     public AppUser() {
     }
 

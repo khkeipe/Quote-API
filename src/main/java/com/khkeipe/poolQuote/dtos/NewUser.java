@@ -1,5 +1,7 @@
 package com.khkeipe.poolQuote.dtos;
 
+import com.khkeipe.poolQuote.entities.Address;
+
 import java.util.Objects;
 
 public class NewUser {

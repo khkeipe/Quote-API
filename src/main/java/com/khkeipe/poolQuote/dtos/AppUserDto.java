@@ -1,5 +1,6 @@
 package com.khkeipe.poolQuote.dtos;
 
+import com.khkeipe.poolQuote.entities.Address;
 import com.khkeipe.poolQuote.entities.AppUser;
 
 import java.util.Objects;
@@ -9,6 +10,7 @@ public class AppUserDto {
     private int id;
     private String email;
     private String role;
+    private Address address;
 
     public AppUserDto() {
     }
