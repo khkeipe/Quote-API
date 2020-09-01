@@ -3,10 +3,7 @@ package com.khkeipe.poolQuote.web.controllers;
 import com.khkeipe.poolQuote.entities.PoolDealer;
 import com.khkeipe.poolQuote.services.DealerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +22,12 @@ public class DealerController {
     public List<PoolDealer> getAllDealers() {
         return dealerService.getAllDealers();
     }
+
+    @GetMapping("/id/{id}")
+    public PoolDealer getDealerById(@PathVariable int id){return dealerService.getByDealerId(id);}
+
+    @GetMapping("/code/{code}")
+    public PoolDealer getDealerByCode(@PathVariable String code){return dealerService.getDealerByCode(code);}
 
     @PostMapping("")
     public PoolDealer addDealer(PoolDealer newDealer) {
