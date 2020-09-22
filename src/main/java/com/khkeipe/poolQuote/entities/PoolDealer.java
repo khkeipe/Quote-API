@@ -23,27 +23,42 @@ public class PoolDealer {
     @Column
     private String email;
 
-    //NEEDS ANNOTATIONS
-    private Address address;
+    @Column
+    private String streetName;
+
+    @Column
+    private String cityName;
+
+    @Column
+    private String stateName;
+
+    @Column
+    private int zipCode;
 
     public PoolDealer() {
     }
 
-    public PoolDealer(String dealerName, String dealerCode, String phoneNumber, String email, Address address) {
+    public PoolDealer(String dealerName, String dealerCode, String phoneNumber, String email, String streetName, String cityName, String stateName, int zipCode) {
         this.dealerName = dealerName;
         this.dealerCode = dealerCode;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.address = address;
+        this.streetName = streetName;
+        this.cityName = cityName;
+        this.stateName = stateName;
+        this.zipCode = zipCode;
     }
 
-    public PoolDealer(int id, String dealerName, String dealerCode, String phoneNumber, String email, Address address) {
+    public PoolDealer(int id, String dealerName, String dealerCode, String phoneNumber, String email, String streetName, String cityName, String stateName, int zipCode) {
         this.id = id;
         this.dealerName = dealerName;
         this.dealerCode = dealerCode;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.address = address;
+        this.streetName = streetName;
+        this.cityName = cityName;
+        this.stateName = stateName;
+        this.zipCode = zipCode;
     }
 
     public int getId() {
@@ -86,12 +101,36 @@ public class PoolDealer {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     @Override
@@ -100,16 +139,19 @@ public class PoolDealer {
         if (o == null || getClass() != o.getClass()) return false;
         PoolDealer that = (PoolDealer) o;
         return id == that.id &&
+                zipCode == that.zipCode &&
                 Objects.equals(dealerName, that.dealerName) &&
                 Objects.equals(dealerCode, that.dealerCode) &&
                 Objects.equals(phoneNumber, that.phoneNumber) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(address, that.address);
+                Objects.equals(streetName, that.streetName) &&
+                Objects.equals(cityName, that.cityName) &&
+                Objects.equals(stateName, that.stateName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dealerName, dealerCode, phoneNumber, email, address);
+        return Objects.hash(id, dealerName, dealerCode, phoneNumber, email, streetName, cityName, stateName, zipCode);
     }
 
     @Override
@@ -120,7 +162,10 @@ public class PoolDealer {
                 ", dealerCode='" + dealerCode + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", address=" + address +
+                ", streetName='" + streetName + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", stateName='" + stateName + '\'' +
+                ", zipCode=" + zipCode +
                 '}';
     }
 
