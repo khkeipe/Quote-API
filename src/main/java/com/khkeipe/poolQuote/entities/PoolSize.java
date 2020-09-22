@@ -21,8 +21,8 @@ public class PoolSize {
     @Column
     private int depth;
 
-    @OneToMany(mappedBy = "size")
-    private List<Pool> poolList;
+//    @OneToMany(mappedBy = "size")
+//    private List<Pool> poolList;
 
     public PoolSize() {
     }
