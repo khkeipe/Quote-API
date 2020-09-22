@@ -25,9 +25,9 @@ public class Pool {
     @Column
     private String metricCode;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private PoolSize size;
+//    @ManyToOne
+//    @JoinColumn(nullable = false)
+//    private PoolSize size;
 
     public Pool() {
     }
