@@ -23,27 +23,35 @@ public class Customer {
     @Column(nullable = false)
     private String email;
 
-    //NEEDS ANNOTATIONS
-    private Address address;
+    @Column(nullable = false)
+    private String streetName;
+
+    @Column(nullable = false)
+    private String cityName;
+
+    @Column(nullable = false)
+    private String stateName;
+
+    @Column(nullable = false)
+    private int zipCode;
+
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false)
+    private Quote quote;
 
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, String phoneNumber, String email, Address address) {
+    public Customer(String firstName, String lastName, String phoneNumber, String email, String streetName, String cityName, String stateName, int zipCode, Quote quote) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.address = address;
-    }
-
-    public Customer(int id, String firstName, String lastName, String phoneNumber, String email, Address address) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
+        this.streetName = streetName;
+        this.cityName = cityName;
+        this.stateName = stateName;
+        this.zipCode = zipCode;
+        this.quote = quote;
     }
 
     public int getId() {
@@ -86,12 +94,44 @@ public class Customer {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public Quote getQuote() {
+        return quote;
+    }
+
+    public void setQuote(Quote quote) {
+        this.quote = quote;
     }
 
     @Override
@@ -100,16 +140,20 @@ public class Customer {
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return id == customer.id &&
+                zipCode == customer.zipCode &&
                 Objects.equals(firstName, customer.firstName) &&
                 Objects.equals(lastName, customer.lastName) &&
                 Objects.equals(phoneNumber, customer.phoneNumber) &&
                 Objects.equals(email, customer.email) &&
-                Objects.equals(address, customer.address);
+                Objects.equals(streetName, customer.streetName) &&
+                Objects.equals(cityName, customer.cityName) &&
+                Objects.equals(stateName, customer.stateName) &&
+                Objects.equals(quote, customer.quote);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, phoneNumber, email, address);
+        return Objects.hash(id, firstName, lastName, phoneNumber, email, streetName, cityName, stateName, zipCode, quote);
     }
 
     @Override
@@ -120,8 +164,11 @@ public class Customer {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", address=" + address +
+                ", streetName='" + streetName + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", stateName='" + stateName + '\'' +
+                ", zipCode=" + zipCode +
+                ", quote=" + quote +
                 '}';
     }
-
 }
