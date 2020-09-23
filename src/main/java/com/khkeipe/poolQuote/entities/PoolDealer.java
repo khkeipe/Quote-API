@@ -1,6 +1,7 @@
 package com.khkeipe.poolQuote.entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -34,6 +35,9 @@ public class PoolDealer {
 
     @Column
     private int zipCode;
+
+    @OneToMany(mappedBy = "dealerRep")
+    private List<AppUser> users;
 
     public PoolDealer() {
     }
