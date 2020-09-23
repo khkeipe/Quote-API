@@ -22,6 +22,10 @@ public class AppUser {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private PoolDealer dealerRep;
+
 //    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
 //    private Address address;
 
