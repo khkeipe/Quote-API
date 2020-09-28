@@ -39,6 +39,9 @@ public class PoolDealer {
     @OneToMany(mappedBy = "dealerRep")
     private List<AppUser> users;
 
+    @OneToMany(mappedBy = "quoteDealer")
+    private List<Quote> quotes;
+
     public PoolDealer() {
     }
 
