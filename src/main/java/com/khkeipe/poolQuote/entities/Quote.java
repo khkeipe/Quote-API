@@ -18,7 +18,9 @@ public class Quote {
     @OneToOne(mappedBy = "quote", fetch = FetchType.EAGER, orphanRemoval = true)
     private Customer quoteCustomer;
 
-    //private PoolDealer quoteDealer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private PoolDealer quoteDealer;
 
     //private Pool quotePool;
 
