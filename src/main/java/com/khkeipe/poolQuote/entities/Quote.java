@@ -1,5 +1,8 @@
 package com.khkeipe.poolQuote.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -21,14 +24,16 @@ public class Quote {
     @OneToOne(mappedBy = "quote", fetch = FetchType.EAGER, orphanRemoval = true)
     private Customer quoteCustomer;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private PoolDealer quoteDealer;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "")
     private List<Pool> quotePool;
 
-    //USER
+    // TODO Add user relationship
 
     public Quote() {
     }
