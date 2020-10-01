@@ -34,7 +34,7 @@ public class PoolDealer {
     private String stateName;
 
     @Column
-    private int zipCode;
+    private String zipCode;
 
     @OneToMany(mappedBy = "dealerRep")
     private List<AppUser> users;
@@ -45,7 +45,7 @@ public class PoolDealer {
     public PoolDealer() {
     }
 
-    public PoolDealer(String dealerName, String dealerCode, String phoneNumber, String email, String streetName, String cityName, String stateName, int zipCode) {
+    public PoolDealer(String dealerName, String dealerCode, String phoneNumber, String email, String streetName, String cityName, String stateName, String zipCode) {
         this.dealerName = dealerName;
         this.dealerCode = dealerCode;
         this.phoneNumber = phoneNumber;
@@ -56,7 +56,7 @@ public class PoolDealer {
         this.zipCode = zipCode;
     }
 
-    public PoolDealer(int id, String dealerName, String dealerCode, String phoneNumber, String email, String streetName, String cityName, String stateName, int zipCode) {
+    public PoolDealer(int id, String dealerName, String dealerCode, String phoneNumber, String email, String streetName, String cityName, String stateName, String zipCode) {
         this.id = id;
         this.dealerName = dealerName;
         this.dealerCode = dealerCode;
@@ -132,11 +132,11 @@ public class PoolDealer {
         this.stateName = stateName;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
