@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DealerRepository extends CrudRepository<PoolDealer, Integer> {
+
+    PoolDealer findPoolDealerById(int id);
+
 }

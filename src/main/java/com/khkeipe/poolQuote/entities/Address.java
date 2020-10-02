@@ -23,9 +23,9 @@ public class Address {
     @Column(nullable = false)
     private String zip;
 
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false)
-    private AppUser user;
+//    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+//    @JoinColumn(nullable = false)
+//    private AppUser user;
 
     public Address() {
     }

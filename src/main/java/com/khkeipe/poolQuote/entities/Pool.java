@@ -25,9 +25,9 @@ public class Pool {
     @Column
     private String metricCode;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private PoolSize size;
+//    @ManyToOne
+//    @JoinColumn(nullable = false)
+//    private PoolSize size;
 
     public Pool() {
     }
@@ -37,7 +37,6 @@ public class Pool {
         this.poolCode = poolCode;
         this.poolMetric = metric;
         this.metricCode = metricCode;
-        this.size = size;
     }
 
     public Pool(int id, PoolType poolType, String poolCode, String metric, String metricCode, PoolSize size) {
@@ -46,7 +45,6 @@ public class Pool {
         this.poolCode = poolCode;
         this.poolMetric = metric;
         this.metricCode = metricCode;
-        this.size = size;
     }
 
     public int getId() {
@@ -89,14 +87,6 @@ public class Pool {
         this.metricCode = metricCode;
     }
 
-    public PoolSize getSize() {
-        return size;
-    }
-
-    public void setSize(PoolSize size) {
-        this.size = size;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,13 +96,12 @@ public class Pool {
                 Objects.equals(poolType, pool.poolType) &&
                 Objects.equals(poolCode, pool.poolCode) &&
                 Objects.equals(poolMetric, pool.poolMetric) &&
-                Objects.equals(metricCode, pool.metricCode) &&
-                Objects.equals(size, pool.size);
+                Objects.equals(metricCode, pool.metricCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, poolType, poolCode, poolMetric, metricCode, size);
+        return Objects.hash(id, poolType, poolCode, poolMetric, metricCode);
     }
 
     @Override
@@ -123,7 +112,6 @@ public class Pool {
                 ", poolCode='" + poolCode + '\'' +
                 ", Metric='" + poolMetric + '\'' +
                 ", metricCode='" + metricCode + '\'' +
-                ", size=" + size +
                 '}';
     }
 }
