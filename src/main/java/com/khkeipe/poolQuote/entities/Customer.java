@@ -1,5 +1,7 @@
 package com.khkeipe.poolQuote.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -35,6 +37,7 @@ public class Customer {
     @Column(nullable = false)
     private int zipCode;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
     private Quote quote;
