@@ -4,8 +4,11 @@ import com.khkeipe.poolQuote.dtos.AppUserDto;
 import com.khkeipe.poolQuote.dtos.Credentials;
 import com.khkeipe.poolQuote.dtos.NewUser;
 import com.khkeipe.poolQuote.entities.AppUser;
+import com.khkeipe.poolQuote.entities.PoolDealer;
+import com.khkeipe.poolQuote.entities.UserRole;
 import com.khkeipe.poolQuote.exceptions.*;
 import com.khkeipe.poolQuote.repositories.AppUserRepository;
+import com.khkeipe.poolQuote.repositories.DealerRepository;
 import com.khkeipe.poolQuote.util.GetList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +22,12 @@ public class AppUserService {
 
     private AppUserRepository userRepo;
 
+    private DealerRepository dealerRepo;
+
     @Autowired
-    public AppUserService(AppUserRepository repo) {
-        this.userRepo = repo;
+    public AppUserService(AppUserRepository userRepository, DealerRepository dealerRepository) {
+        this.userRepo = userRepository;
+        this.dealerRepo = dealerRepository;
     }
 
     @Transactional(readOnly = true)
@@ -59,28 +65,35 @@ public class AppUserService {
 
     @Transactional
     public AppUserDto createUser(NewUser newUser) {
-        System.out.println(newUser);
-        AppUser user;
-        if(newUser.getEmail().trim().equals("") || newUser.getPassword().trim().equals("") || newUser.getPasswordVerification().trim().equals("")
-        || newUser.getEmail() == null || newUser.getPassword() == null || newUser.getPasswordVerification() == null) {
-            throw new BadRequestException("Please enter email and password");
+
+        if(     newUser.getEmail().trim().equals("") ||
+                newUser.getPassword().trim().equals("") ||
+                newUser.getEmail() == null ||
+                newUser.getPassword() == null ||
+                newUser.getRole() == null ||
+                newUser.getDealerRep() <= 0
+        ) {
+            throw new BadRequestException("Please enter valid user information");
         }
 
         AppUser emailCheck = userRepo.findAppUserByEmail(newUser.getEmail());
         if(emailCheck != null) {
             throw new ConflictExecption("User with this email already exists");
         }
-        if(!newUser.getPassword().equals(newUser.getPasswordVerification())) {
-            throw new ConflictExecption("Passwords do not match");
-        }
+
+        AppUser user;
 
         try {
-            user = new AppUser(newUser);
+
+            PoolDealer dealer = dealerRepo.findPoolDealerById(newUser.getDealerRep());
+            user = new AppUser(newUser.getEmail(), newUser.getPassword(), UserRole.getByName(newUser.getRole()), dealer);
             userRepo.save(user);
+
         } catch (Exception e) {
             throw new DataPercistanceExecption("User could not be created");
         }
         return new AppUserDto(user);
+
     }
 
     @Transactional

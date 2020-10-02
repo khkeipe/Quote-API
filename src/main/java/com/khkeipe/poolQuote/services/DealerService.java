@@ -13,6 +13,8 @@ import java.util.List;
 
 import static com.khkeipe.poolQuote.util.GetList.getListFromIterable;
 
+//TODO Error Handling for Dealer Service
+
 @Service
 public class DealerService {
 

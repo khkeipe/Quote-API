@@ -22,18 +22,29 @@ public class AppUser {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private PoolDealer dealerRep;
+
+//    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+//    private Address address;
+
     public AppUser() {
     }
 
-    public AppUser(String username, String password) {
-        this.email = username;
+    public AppUser(String email, String password, UserRole role, PoolDealer dealerRep) {
+        this.email = email;
         this.password = password;
+        this.role = role;
+        this.dealerRep = dealerRep;
     }
 
-    public AppUser(int id, String username, String password) {
+    public AppUser(int id, String email, String password, UserRole role, PoolDealer dealerRep) {
         this.id = id;
-        this.email = username;
+        this.email = email;
         this.password = password;
+        this.role = role;
+        this.dealerRep = dealerRep;
     }
 
     public AppUser(NewUser newUser) {
@@ -55,7 +66,7 @@ public class AppUser {
         return email;
     }
 
-    public void setUsername(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -75,6 +86,14 @@ public class AppUser {
         this.role = role;
     }
 
+    public PoolDealer getDealerRep() {
+        return dealerRep;
+    }
+
+    public void setDealerRep(PoolDealer dealerRep) {
+        this.dealerRep = dealerRep;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,20 +101,25 @@ public class AppUser {
         AppUser appUser = (AppUser) o;
         return id == appUser.id &&
                 Objects.equals(email, appUser.email) &&
-                Objects.equals(password, appUser.password);
+                Objects.equals(password, appUser.password) &&
+                role == appUser.role &&
+                Objects.equals(dealerRep, appUser.dealerRep);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, password);
+        return Objects.hash(id, email, password, role, dealerRep);
     }
 
     @Override
     public String toString() {
         return "AppUser{" +
                 "id=" + id +
-                ", email'" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
+                ", dealerRep=" + dealerRep +
                 '}';
     }
+
 }
