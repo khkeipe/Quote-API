@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//TODO crud
+
 @Service
 public class PoolService {
 
