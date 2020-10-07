@@ -25,7 +25,7 @@ public class DealerController {
     }
 
     @PostMapping("")
-    public PoolDealer addDealer(PoolDealer newDealer) {
+    public PoolDealer addDealer(@RequestBody PoolDealer newDealer) {
         return dealerService.createDealer(newDealer);
     }
 }
