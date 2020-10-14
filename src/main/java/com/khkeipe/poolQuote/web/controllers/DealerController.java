@@ -24,8 +24,11 @@ public class DealerController {
         return dealerService.getAllDealers();
     }
 
+    @GetMapping("/id/{id}")
+    public PoolDealer getDealerById(@PathVariable int id){ return dealerService.getDealerById(id); }
+
     @PostMapping("")
-    public PoolDealer addDealer(PoolDealer newDealer) {
+    public PoolDealer addDealer(@RequestBody PoolDealer newDealer) {
         return dealerService.createDealer(newDealer);
     }
 }
