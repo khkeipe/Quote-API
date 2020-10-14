@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/dealers")
-//@CrossOrigin(origins = "http://khkeipe-pool-quote.s3-website-us-east-1.amazonaws.com/")
+@CrossOrigin(origins = "http://khkeipe-pool-quote.s3-website-us-east-1.amazonaws.com/")
 public class DealerController {
 
     private DealerService dealerService;
