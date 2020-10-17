@@ -3,10 +3,7 @@ package com.khkeipe.poolQuote.web.controllers;
 import com.khkeipe.poolQuote.entities.Pool;
 import com.khkeipe.poolQuote.services.PoolService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,16 @@ public class PoolController {
     @GetMapping("")
     public List<Pool> getAllPools() {
         return poolService.getAllPools();
+    }
+
+    @GetMapping("/{id}")
+    public Pool getPoolById(@PathVariable int id) {
+        return poolService.getPoolById(id);
+    }
+
+    @PostMapping("")
+    public Pool createPool(Pool newPool) {
+        poolService.createPool(newPool);
+        return newPool;
     }
 }

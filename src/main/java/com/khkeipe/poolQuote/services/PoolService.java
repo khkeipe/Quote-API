@@ -37,4 +37,23 @@ public class PoolService {
         return pools;
     }
 
+    public Pool getPoolById(int id) {
+        Pool pool = new Pool();
+        try {
+            pool = poolRepo.findById(id).get();
+        } catch (Exception e) {
+            throw new ServerErrorException();
+        }
+        return pool;
+    }
+
+    public Pool createPool(Pool newPool){
+        try{
+            poolRepo.save(newPool);
+        } catch (Exception e) {
+            throw new ServerErrorException("Pool was not saved");
+        }
+        return newPool;
+    }
+
 }
