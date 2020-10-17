@@ -13,38 +13,44 @@ public class Pool {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Enumerated(EnumType.STRING)
-    private PoolType poolType;
+    @Column
+    private String poolType;
 
     @Column
     private String poolCode;
 
     @Column
-    private String poolMetric;
+    private int length;
 
     @Column
-    private String metricCode;
+    private int width;
 
-//    @ManyToOne
-//    @JoinColumn(nullable = false)
-//    private PoolSize size;
+    @Column
+    private int height;
+
+    @Column
+    private int hopperSize;
 
     public Pool() {
     }
 
-    public Pool(PoolType poolType, String poolCode, String metric, String metricCode, PoolSize size) {
+    public Pool(String poolType, String poolCode, int length, int width, int height, int hopperSize) {
         this.poolType = poolType;
         this.poolCode = poolCode;
-        this.poolMetric = metric;
-        this.metricCode = metricCode;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.hopperSize = hopperSize;
     }
 
-    public Pool(int id, PoolType poolType, String poolCode, String metric, String metricCode, PoolSize size) {
+    public Pool(int id, String poolType, String poolCode, int length, int width, int height, int hopperSize) {
         this.id = id;
         this.poolType = poolType;
         this.poolCode = poolCode;
-        this.poolMetric = metric;
-        this.metricCode = metricCode;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.hopperSize = hopperSize;
     }
 
     public int getId() {
@@ -55,11 +61,11 @@ public class Pool {
         this.id = id;
     }
 
-    public PoolType getPoolType() {
+    public String getPoolType() {
         return poolType;
     }
 
-    public void setPoolType(PoolType poolType) {
+    public void setPoolType(String poolType) {
         this.poolType = poolType;
     }
 
@@ -71,20 +77,36 @@ public class Pool {
         this.poolCode = poolCode;
     }
 
-    public String getMetric() {
-        return poolMetric;
+    public int getLength() {
+        return length;
     }
 
-    public void setMetric(String metric) {
-        poolMetric = metric;
+    public void setLength(int length) {
+        this.length = length;
     }
 
-    public String getMetricCode() {
-        return metricCode;
+    public int getWidth() {
+        return width;
     }
 
-    public void setMetricCode(String metricCode) {
-        this.metricCode = metricCode;
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getHopperSize() {
+        return hopperSize;
+    }
+
+    public void setHopperSize(int hopperSize) {
+        this.hopperSize = hopperSize;
     }
 
     @Override
@@ -93,25 +115,29 @@ public class Pool {
         if (o == null || getClass() != o.getClass()) return false;
         Pool pool = (Pool) o;
         return id == pool.id &&
+                length == pool.length &&
+                width == pool.width &&
+                height == pool.height &&
+                hopperSize == pool.hopperSize &&
                 Objects.equals(poolType, pool.poolType) &&
-                Objects.equals(poolCode, pool.poolCode) &&
-                Objects.equals(poolMetric, pool.poolMetric) &&
-                Objects.equals(metricCode, pool.metricCode);
+                Objects.equals(poolCode, pool.poolCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, poolType, poolCode, poolMetric, metricCode);
+        return Objects.hash(id, poolType, poolCode, length, width, height, hopperSize);
     }
 
     @Override
     public String toString() {
         return "Pool{" +
                 "id=" + id +
-                ", poolType=" + poolType +
+                ", poolType='" + poolType + '\'' +
                 ", poolCode='" + poolCode + '\'' +
-                ", Metric='" + poolMetric + '\'' +
-                ", metricCode='" + metricCode + '\'' +
+                ", length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", hopperSize=" + hopperSize +
                 '}';
     }
 }
