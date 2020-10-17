@@ -24,7 +24,7 @@ public class DealerController {
         return dealerService.getAllDealers();
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public PoolDealer getDealerById(@PathVariable int id){ return dealerService.getDealerById(id); }
 
     @PostMapping("")
