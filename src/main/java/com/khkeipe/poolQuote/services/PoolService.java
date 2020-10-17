@@ -1,12 +1,14 @@
 package com.khkeipe.poolQuote.services;
 
 import com.khkeipe.poolQuote.entities.Pool;
+import com.khkeipe.poolQuote.exceptions.DataPercistanceExecption;
 import com.khkeipe.poolQuote.exceptions.NotFoundException;
 import com.khkeipe.poolQuote.exceptions.ServerErrorException;
 import com.khkeipe.poolQuote.repositories.PoolRepository;
 import com.khkeipe.poolQuote.util.GetList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class PoolService {
         this.poolRepo = repo;
     }
 
+    @Transactional(readOnly = true)
     public List<Pool> getAllPools() {
         Iterable<Pool> e;
         List<Pool> pools;
@@ -37,6 +40,7 @@ public class PoolService {
         return pools;
     }
 
+    @Transactional(readOnly=true)
     public Pool getPoolById(int id) {
         Pool pool = new Pool();
         try {
@@ -47,13 +51,16 @@ public class PoolService {
         return pool;
     }
 
+    @Transactional
     public Pool createPool(Pool newPool){
+        Pool pool;
+
         try{
-            poolRepo.save(newPool);
+            pool = poolRepo.save(newPool);
         } catch (Exception e) {
-            throw new ServerErrorException("Pool was not saved");
+            throw new DataPercistanceExecption("New pool was not saved");
         }
-        return newPool;
+        return pool;
     }
 
 }
