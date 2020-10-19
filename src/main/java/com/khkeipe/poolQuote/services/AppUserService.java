@@ -63,6 +63,8 @@ public class AppUserService {
         return new AppUserDto(user);
     }
 
+    //TODO check for unique emails
+
     @Transactional
     public AppUserDto createUser(NewUser newUser) {
 
